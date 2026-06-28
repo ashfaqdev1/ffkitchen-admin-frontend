@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       // 🔑 When frontend requests start with /api, redirect them to the backend server URL
       "/api": {
-        target: "http://localhost:5000", // 👈 Change this to match your Express server's port
+        target: "http://51.20.118.240:5000", // 👈 Change this to match your Express server's port
         changeOrigin: true, // 👈 Crucial for bypassing CORS limitations
         secure: false, // 👈 Set to false if your backend does not use local HTTPS/SSL
         // Optional: rewrite url matching if your backend doesn't expect the "/api" route prefix
