@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+const API = import.meta.env.VITE_API_URL;
 export default function LoginPage({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ export default function LoginPage({ onLoginSuccess }) {
 
     try {
       // API call endpoint integrated below
-      const response = await fetch("/api/v1/admin/login", {
+      const response = await fetch(`${API}/api/v1/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// const API = import
+const API = import.meta.env.VITE_API_URL;
 // Async Thunk: Fetch All Orders
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/v1/order/orders", {
+      const response = await fetch(`${API}/api/v1/order/orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const updateOrderStatusBackend = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       // Request url me strictly _id (jo id variable me pass ho rha hai) jayega
-      const response = await fetch(`/api/v1/order/edit/${id}`, {
+      const response = await fetch(`${API}/api/v1/order/edit/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

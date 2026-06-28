@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// const API =
+const API = import.meta.env.VITE_API_URL;
 // ─── 1. FETCH ALL PRODUCTS FROM SERVER ──────────────────────────────
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/v1/product/read", {
+      const response = await fetch(`${API}/api/v1/product/read`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const addProduct = createAsyncThunk(
         formData.append("image", productData.imageFile); // 'image' field matches Multer
       }
 
-      const response = await fetch("/api/v1/product/create", {
+      const response = await fetch(`${API}/api/v1/product/create`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ export const updateProduct = createAsyncThunk(
         formData.append("image", updatedData.imageFile);
       }
 
-      const response = await fetch(`/api/v1/product/edit/${id}`, {
+      const response = await fetch(`${API}/api/v1/product/edit/${id}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +138,7 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/v1/product/delete/${id}`, {
+      const response = await fetch(`${API}/api/v1/product/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
