@@ -65,28 +65,33 @@ export default function ModalManager({
                       className="form-control"
                       required
                       placeholder="e.g. Royal Dinner Set"
-                      value={editData.name || ""}
+                      value={editData?.name || ""}
                       onChange={(e) =>
                         setEditData({ ...editData, name: e.target.value })
                       }
                     />
                   </div>
 
+                  {/* 🔄 CHANGED FROM SELECT TO INPUT WITH DATALIST */}
                   <div className="form-group">
-                    <label>Category</label>
-                    <select
+                    <label>Category *</label>
+                    <input
+                      type="text"
+                      list="category-suggestions"
                       className="form-control"
-                      value={editData.category || "Dinner Sets"}
+                      placeholder="Type or select category"
+                      required
+                      value={editData?.category || ""}
                       onChange={(e) =>
                         setEditData({ ...editData, category: e.target.value })
                       }
-                    >
-                      {CATS.map((cat) => (
-                        <option key={cat} value={cat}>
-                          {cat}
-                        </option>
+                    />
+                    {/* Yeh user ko existing categories ki suggestions dikhayega */}
+                    <datalist id="category-suggestions">
+                      {CATS?.map((cat) => (
+                        <option key={cat} value={cat} />
                       ))}
-                    </select>
+                    </datalist>
                   </div>
 
                   <div className="form-group">
@@ -97,7 +102,7 @@ export default function ModalManager({
                       required
                       min="0"
                       placeholder="0"
-                      value={editData.price || ""}
+                      value={editData?.price || ""}
                       onChange={(e) =>
                         setEditData({ ...editData, price: e.target.value })
                       }
@@ -112,7 +117,7 @@ export default function ModalManager({
                       required
                       min="0"
                       placeholder="0"
-                      value={editData.stock ?? ""}
+                      value={editData?.stock ?? ""}
                       onChange={(e) =>
                         setEditData({ ...editData, stock: e.target.value })
                       }
@@ -126,14 +131,14 @@ export default function ModalManager({
                     className="form-control"
                     rows="3"
                     placeholder="Enter item details..."
-                    value={editData.desc || ""}
+                    value={editData?.desc || ""}
                     onChange={(e) =>
                       setEditData({ ...editData, desc: e.target.value })
                     }
                   />
                 </div>
 
-                {/* 🚀 REPLACED EMOJIS WITH STATIC LIVE IMAGE PREVIEW GENERATOR */}
+                {/* IMAGE PREVIEW GENERATOR */}
                 <div
                   className="form-group"
                   style={{
